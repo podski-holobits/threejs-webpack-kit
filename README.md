@@ -5,8 +5,11 @@
 ## Soon available on npm 
 
  Coming soon...
- Pst! You will be able then to run npm install @podski/threejs-webpack-kit 
- instead of having to download it from github.
+ Pst! You will be able soon to run 
+```
+npm install @podski/threejs-webpack-kit 
+```
+ instead of having to download the package from github.
 
 ## Run for development
 Install: 
@@ -15,7 +18,7 @@ npm install
 ```
 Run:
 ```
-npm start:dev` 
+npm start:dev
 ```
 * Starts up webpack server at localhost:8080 and opens browser. Hot mode enabled; 
 * dynamically keeps track of changes to js files
@@ -29,13 +32,13 @@ npm start:dev`
 * cleans the production 'dist' folder on start
 
 
-## Structure
+## Structure (in progress)
 ```
 dist - Directory for built distributionfiles from the npm build:prod script
 src - Directory for all development files (js, hmtl, images, shaders)
 ├── css - Contains all source CSS and SCSS files, that are compiled to `dist/css`
 ├── scripts - Contains all the js script files, without the entry point script
-├── assets - Contains all the js script files, without the entry point script. Mostly copied over to build folder with build command. 
+├── assets - Contains all the asset  files. 
     └── img - Contains image files 
     └── gltf - Contains gltf 3d files 
 └── shaders - Contains all shader files ().frag and .vert  files)
