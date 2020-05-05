@@ -4,8 +4,8 @@
   "description": "A starting kit for future projects with three.js based on Webpack. Includes most usable modules for development and production. Aim mainly for my personal projects - but may be useful for others also.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack -p --config webpack-config/prod.config.js",
-    "start": "webpack-dev-server --config webpack-config/dev.config.js"
+    "build:prod": "webpack -p --config webpack-config/prod.config.js",
+    "start:dev": "webpack-dev-server --config webpack-config/dev.config.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +26,9 @@
   },
   "homepage": "https://github.com/podski-holobits/threejs-webpack-kit#readme",
   "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "babel-loader": "^8.1.0",
     "clean-webpack-plugin": "^3.0.0",
     "file-loader": "^6.0.0",
     "html-loader": "^1.1.0",

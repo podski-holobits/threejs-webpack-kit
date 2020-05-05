@@ -1,16 +1,16 @@
 const webpack = require('webpack');
 const path = require('path');
 
-//Requiring development packages
+// [1] Requiring development packages
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin'); 
 
-// Paths - entry paths and names
+// [2] Paths - entry paths and names
 const entryPath = './src/init.js';  //path to starting javascriptfile
 const distPath = 'dist';  //path to dist folder
 const __rootPath = path.resolve(__dirname, '../');   // We are in config folder, so we need to know the root folder path
 
-// moudle.exports configuration by structure
+// [3] moudle.exports configuration
 const config = {
     entry: entryPath,
     output: {
@@ -19,7 +19,17 @@ const config = {
     },
     module: {
         rules: [
-            {
+            {   //Babel transpiling configuration
+                test:  /\.js$/,
+                exclude:  /node_modules/,
+                use: {
+                    loader: "babel-loader",
+                    options: {
+                        presets: ['@babel/preset-env']
+                    }
+                }
+            }, 
+            {   //Html loader
                 test: /\.html$/,
                 use: [
                     {
@@ -28,11 +38,21 @@ const config = {
                     }
                 ]
             },
-        /*  {
-            test: /\.js$/,
-            use: 'babel-loader',
-            exclude: /node_modules/
-        }*/
+            {   //Image loader
+                test:  /\.(png|svg|jpe?g|gif)$/,
+                use: {
+                    loader: "file-loader",
+                    options: {
+                        //keep original image filename
+                        name: '[name].[ext]',
+                        //define output path for img files
+                        outputPath: 'img/',
+                        //put the outputPath into injected path into html file
+                        publicPath: 'img/'
+                    }
+                }
+            },
+        
         ]
     },
     plugins: [
@@ -40,8 +60,8 @@ const config = {
             template: './src/index.html',
             filename: './index.html'
         }),
-        new CleanWebpackPlugin([distPath]),
+        new CleanWebpackPlugin()
     ]
 };
 
-module.exports = config;
+module.exports = {config, entryPath, distPath, __rootPath};
