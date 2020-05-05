@@ -1,0 +1,33 @@
+{
+  "name": "@podski/threejs-webpack-kit",
+  "version": "0.0.1",
+  "description": "A starting kit for future projects with three.js based on Webpack. Includes most usable modules for development and production. Aim mainly for my personal projects - but may be useful for others also.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/podski-holobits/threejs-webpack-kit.git"
+  },
+  "keywords": [
+    "three.js",
+    "three",
+    "glslify",
+    "gsap",
+    "boilerplate",
+    "webpack"
+  ],
+  "author": "Piotr Podziemski <piotr@holobits.pl> (http://holobits.pl)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/podski-holobits/threejs-webpack-kit/issues"
+  },
+  "homepage": "https://github.com/podski-holobits/threejs-webpack-kit#readme",
+  "devDependencies": {
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3",
+    "webpack-merge": "^4.2.2"
+  }
+}
