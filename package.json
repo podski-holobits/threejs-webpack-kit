@@ -4,7 +4,9 @@
   "description": "A starting kit for future projects with three.js based on Webpack. Includes most usable modules for development and production. Aim mainly for my personal projects - but may be useful for others also.",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack -p --config webpack-config/prod.config.js",
+    "start": "webpack-dev-server --config webpack-config/dev.config.js"
   },
   "repository": {
     "type": "git",
