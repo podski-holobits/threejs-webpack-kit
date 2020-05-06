@@ -2,6 +2,9 @@
 ## A template for three.js projects based on webpack
 [https://github.com/podski-holobits/threejs-webpack-kit](https://github.com/podski-holobits/threejs-webpack-kit)
 
+
+![printscreen](./about-stuff/prtscr.jpg "threejs-webpack-kit")
+
 ## Soon available on npm 
 
  Coming soon...

@@ -1,5 +1,5 @@
 import 'three';
-
+import { OrbitControls } from 'three-examples/controls/OrbitControls.js'
 export default class WebGLView {
 
     constructor(app) {
@@ -7,7 +7,7 @@ export default class WebGLView {
         this.app = app;
         
         this.initThree();
-        //this.initInteractions();
+        this.initInteractions();
         this.initEnvironment();
         this.initLights();
 	}
@@ -18,8 +18,8 @@ export default class WebGLView {
 
 		// camera
 		this.camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 1000);
-        this.camera.position.set( 0, 0, 80 );
-
+        this.camera.position.set( 0, 120, 150 );
+        this.camera.setViewOffset ( window.innerWidth , window.innerHeight, 0, -50, window.innerWidth , window.innerHeight)
 		// renderer
         this.renderer = new THREE.WebGLRenderer({ antialias: true});
         this.renderer.setPixelRatio( window.devicePixelRatio );
@@ -28,6 +28,25 @@ export default class WebGLView {
 		//this.clock = new THREE.Clock(true);
 	}
 
+    initInteractions()
+    {
+        // controls
+
+				this.controls = new OrbitControls( this.camera, this.renderer.domElement );
+
+				//controls.addEventListener( 'change', render ); // call this only in static scenes (i.e., if there is no animation loop)
+
+				this.controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+				this.controls.dampingFactor = 0.05;
+
+				this.controls.screenSpacePanning = false;
+
+				this.controls.minDistance = 100;
+				this.controls.maxDistance = 500;
+
+				this.controls.maxPolarAngle = Math.PI / 2;
+				this.controls.target.set(0,15,0);
+    }
 	initEnvironment() {
         
 		this.scene.background = new THREE.Color( 0xcccccc );
@@ -37,7 +56,39 @@ export default class WebGLView {
 		var material = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true } );
 
         var mesh = new THREE.Mesh( geometry, material );
-        mesh.position.set( 0, 0, 0 );
+        mesh.position.set( 0, 15, 0 );
+        mesh.updateMatrix();
+        mesh.matrixAutoUpdate = false;
+        this.scene.add( mesh );
+
+        
+        mesh = new THREE.Mesh( geometry, material );
+        mesh.scale.set( 0.5, 0.5, 0.5 );
+        mesh.position.set( 20, 7.5, 0);
+        mesh.updateMatrix();
+        mesh.matrixAutoUpdate = false;
+        this.scene.add( mesh );
+
+        
+        mesh = new THREE.Mesh( geometry, material );
+        mesh.scale.set( 0.5, 0.5, 0.5 );
+        mesh.position.set( -20, 7.5, 0);
+        mesh.updateMatrix();
+        mesh.matrixAutoUpdate = false;
+        this.scene.add( mesh );
+
+        
+        mesh = new THREE.Mesh( geometry, material );
+        mesh.scale.set( 0.5, 0.5, 0.5 );
+        mesh.position.set( 0, 7.5,-20);
+        mesh.updateMatrix();
+        mesh.matrixAutoUpdate = false;
+        this.scene.add( mesh );
+
+        
+        mesh = new THREE.Mesh( geometry, material );
+        mesh.scale.set( 0.5, 0.5, 0.5 );
+        mesh.position.set( 0, 7.5, 20);
         mesh.updateMatrix();
         mesh.matrixAutoUpdate = false;
         this.scene.add( mesh );
@@ -60,6 +111,7 @@ export default class WebGLView {
 	// PUBLIC RENDER 
 	//---------------------------------------------------------------------------------------------
 	update() {
+        this.controls.update(); // only required if controls.enableDamping = true, or if controls.autoRotate = true
     }
     
 	render() {
