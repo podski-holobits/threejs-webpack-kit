@@ -1,5 +1,6 @@
 import Stats from 'stats.js';
 import DebuGui from './gui/DebuGui.js';
+import WebGLView from './webgl/WebGLView.js';
 
 export default class App {
     constructor() {
@@ -10,16 +11,24 @@ export default class App {
 
         init() {
             this.initDebuGui();
-            
+            this.initWebGLView();
             //At the end - add all the callback listeners (for binding context)
-		    this.addListeners();
+            this.addListeners();
+            this.animate();
+		    this.resize();
         }
 
         initDebuGui() {
             this.debugui = new DebuGui(this,true);
         }
 
+        initWebGLView() {
+            this.glview = new WebGLView(this);
+		    document.querySelector('.container').appendChild(this.glview.renderer.domElement);
+        }
+
         addListeners() {
+		    window.addEventListener('resize', this.resize.bind(this));
             this.handlerAnimate = this.animate.bind(this);
         }
 
@@ -51,13 +60,24 @@ export default class App {
         this.update();
         this.render();
     
-        this.rafLoop = requestAnimationFrame(this.handlerAnimate);
+        requestAnimationFrame(this.handlerAnimate);
     }
 	update() {
-		if (this.gui) this.debugui.update();
+		if (this.glview) this.glview.update();
+		if (this.debugui) this.debugui.update();
     }
     
 	render() {
-		if (this.gui) this.debugui.render();
+		if (this.glview) this.glview.render();
+		if (this.debugui) this.debugui.render();
+    }
+    
+    
+	// ---------------------------------------------------------------------------------------------
+	// EVENT HANDLERS
+	// ---------------------------------------------------------------------------------------------
+    resize() {
+		if (this.glview) this.glview.resize();
 	}
+
 }

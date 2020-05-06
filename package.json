@@ -48,6 +48,7 @@
   "dependencies": {
     "dat.gui": "^0.7.7",
     "domready": "^1.0.8",
+    "normalize.css": "^8.0.1",
     "stats.js": "^0.17.0",
     "three": "^0.116.1"
   }

@@ -53,8 +53,8 @@ src - Directory for all development files (js, hmtl, images, shaders)
 ## Alternatives
 
 ## Inspired by:
-- the structure of [interactive-particles](https://github.com/brunoimbrizi/interactive-particles) project by Bruno Imbrizi;
-- the structure of [ThreeJS-Webpack-ES6-Boilerplate](https://github.com/paulmg/ThreeJS-Webpack-ES6-Boilerplate/) project by paulmg - I tried to make sth a bit simpler and more understandable for my rudimentary JS knowledge;
+- the structure of [interactive-particles](https://github.com/brunoimbrizi/interactive-particles) project by Bruno Imbrizi; Much love and appretiation for his work. Writing mainly in C#/C++ and Unity I immediately liked how the code is structured in the project, it helped me to catch up on the js quite quickly. Definitely check out Bruno [work](https://twitter.com/brunoimbrizi/) and [Codrops](https://tympanus.net/codrops/).
+- the structure of [ThreeJS-Webpack-ES6-Boilerplate](https://github.com/paulmg/ThreeJS-Webpack-ES6-Boilerplate/) project by [paulmg](https://github.com/paulmg/ThreeJS-Webpack-ES6-Boilerplate/commits?author=paulmg). This is a clear and good alternative to my threejs-webpack-kit - so check out if it suits you better! I tried to make sth a bit simpler and more understandable for my rudimentary JS knowledge;
 
 
 [© Piotr Podziemski 2020](http://www.holobits.pl)

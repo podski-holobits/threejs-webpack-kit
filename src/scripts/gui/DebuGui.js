@@ -28,7 +28,7 @@ export default class DebuGui {
 	//---------------------------------------------------------------------------------------------
     //Enable GUI DEBUG display
 	enable() {
-        if (this.stats) this.stats.dom.style.cssText = 'position:absolute;top:20px;left:370px;';
+        if (this.stats) this.stats.dom.style.cssText = 'position:absolute;top:15px;left:10px;z-index:20000;';
         this.enabled = true;
 	}
 

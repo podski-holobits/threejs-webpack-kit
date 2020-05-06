@@ -7,9 +7,20 @@ body {
 	font-size: 16px;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	overflow: hidden;
+	margin: 0;
 }
 
+.header-container {
 
+	position:absolute;
+	top:0px;
+	left:0px;
+	width:100%;
+	z-index: 1000;
+	background-color: $bg_color;
+	padding-left:100px;
+}
 a {
 	text-decoration: none;
 	color: $link_color;
