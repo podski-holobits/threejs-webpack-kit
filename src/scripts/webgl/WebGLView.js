@@ -52,7 +52,7 @@ export default class WebGLView {
 		this.scene.background = new THREE.Color( 0xcccccc );
         this.scene.fog = new THREE.FogExp2( 0xcccccc, 0.002 );
         
-        var geometry = new THREE.CylinderBufferGeometry( 0, 10, 30, 4, 1 );
+        var geometry = new THREE.CylinderBufferGeometry( 0, 10, 30, 8, 1 );
 		var material = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true } );
 
         var mesh = new THREE.Mesh( geometry, material );
@@ -64,7 +64,7 @@ export default class WebGLView {
         
         mesh = new THREE.Mesh( geometry, material );
         mesh.scale.set( 0.5, 0.5, 0.5 );
-        mesh.position.set( 20, 7.5, 0);
+        mesh.position.set( 40, 7.5, 0);
         mesh.updateMatrix();
         mesh.matrixAutoUpdate = false;
         this.scene.add( mesh );
@@ -72,7 +72,7 @@ export default class WebGLView {
         
         mesh = new THREE.Mesh( geometry, material );
         mesh.scale.set( 0.5, 0.5, 0.5 );
-        mesh.position.set( -20, 7.5, 0);
+        mesh.position.set( -40, 7.5, 0);
         mesh.updateMatrix();
         mesh.matrixAutoUpdate = false;
         this.scene.add( mesh );
@@ -80,7 +80,7 @@ export default class WebGLView {
         
         mesh = new THREE.Mesh( geometry, material );
         mesh.scale.set( 0.5, 0.5, 0.5 );
-        mesh.position.set( 0, 7.5,-20);
+        mesh.position.set( 0, 7.5,-40);
         mesh.updateMatrix();
         mesh.matrixAutoUpdate = false;
         this.scene.add( mesh );
@@ -88,7 +88,7 @@ export default class WebGLView {
         
         mesh = new THREE.Mesh( geometry, material );
         mesh.scale.set( 0.5, 0.5, 0.5 );
-        mesh.position.set( 0, 7.5, 20);
+        mesh.position.set( 0, 7.5, 40);
         mesh.updateMatrix();
         mesh.matrixAutoUpdate = false;
         this.scene.add( mesh );
@@ -127,7 +127,8 @@ export default class WebGLView {
 	resize() {
         if (!this.renderer) return;
 
-		this.camera.aspect = window.innerWidth / window.innerHeight;
+        this.camera.aspect = window.innerWidth / window.innerHeight;
+        this.camera.updateProjectionMatrix();
 		this.fovHeight = 2 * Math.tan((this.camera.fov * Math.PI) / 180 / 2) * this.camera.position.z;
         this.renderer.setSize( window.innerWidth, window.innerHeight );
         
