@@ -9,6 +9,7 @@ export default class WebGLView {
         this.initThree();
         this.initInteractions();
         this.initEnvironment();
+        this.initModels();
         this.initLights();
 	}
 
@@ -47,6 +48,10 @@ export default class WebGLView {
 				this.controls.maxPolarAngle = Math.PI / 2;
 				this.controls.target.set(0,15,0);
     }
+    initModels()
+    {
+    }
+
 	initEnvironment() {
         
 		this.scene.background = new THREE.Color( 0xcccccc );
