@@ -74,12 +74,15 @@ export default class WebGLView {
         mesh.matrixAutoUpdate = false;
         //this.scene.add( mesh );
 
-        
+        this.xposition = 7.5;
+
         mesh = new THREE.Mesh( geometry, material );
         mesh.scale.set( 0.5, 0.5, 0.5 );
         mesh.position.set( 40, 7.5, 0);
+
+        //Add debug manipulation
         mesh.updateMatrix();
-        mesh.matrixAutoUpdate = false;
+        mesh.matrixAutoUpdate = true;
         this.scene.add( mesh );
 
         
@@ -87,7 +90,7 @@ export default class WebGLView {
         mesh.scale.set( 0.5, 0.5, 0.5 );
         mesh.position.set( -40, 7.5, 0);
         mesh.updateMatrix();
-        mesh.matrixAutoUpdate = false;
+        mesh.matrixAutoUpdate = true;
         this.scene.add( mesh );
 
         
@@ -113,7 +116,8 @@ export default class WebGLView {
                //var  mixer = new THREE.AnimationMixer( gltf.scene );
                 //var action = mixer.clipAction( gltf.animations[ 0 ] );
                // action.play();
-            
+                
+             this.app.debugui.dgui.add(gltf.scene.position, 'y',  -15, 15);
                 this.scene.add( gltf.scene );
         
             },
@@ -131,29 +135,6 @@ export default class WebGLView {
                 console.log("Error", error.message);
             }
          );
-        this.assetloader.gltfLoader.load( monkeyGltfPath,  ( gltf ) => {
- 
-                //var  mixer = new THREE.AnimationMixer( gltf.scene );
-                 //var action = mixer.clipAction( gltf.animations[ 0 ] );
-                // action.play();
-             
-                 this.scene.add( gltf.scene );
-         
-             },
-             // called while loading is progressing
-             ( xhr ) =>  {
-         
-                 console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-         
-             },
-             // called when loading has errors
-             ( error ) =>  {
-         
-                 console.log( 'An error happeneddd' );
-                 console.log("Error", error.name);
-                 console.log("Error", error.message);
-             }
-          );
     }
     initLights()
     {

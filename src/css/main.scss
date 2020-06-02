@@ -21,6 +21,13 @@ body {
 	background-color: $bg_color;
 	padding-left:100px;
 }
+
+#dgui-container{
+	position:fixed;
+	top:0px;
+	right:20px;
+	z-index: 1200;
+}
 a {
 	text-decoration: none;
 	color: $link_color;

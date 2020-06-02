@@ -1,5 +1,5 @@
 import Stats from 'stats.js';
-import Dat from 'dat.gui';
+import dat from 'dat.gui';
 
 export default class DebuGui {
 
@@ -11,6 +11,7 @@ export default class DebuGui {
         //Real init functions
         //Init stats display
 		this.initStats();
+		this.initDatGui();
         if(enabled) {this.enable()};
 
 		// this.disable();
@@ -21,7 +22,21 @@ export default class DebuGui {
         this.stats.showPanel( 0 ); // 0: fps, 1: ms, 2: mb, 3+: custom
 		document.body.appendChild(this.stats.dom);
 	}
+	initDatGui() {
+		this.dgui = new dat.GUI({ autoPlace: false });
+		this.customContainer = document.getElementById('dgui-container');
+		this.customContainer.appendChild(this.dgui.domElement);
 
+		this.message = 'ttt';
+		this.folder_1 = this.dgui.addFolder(`DebugObject`);
+		this.folder_1.add(this, 'message', [ 'pizza', 'chrome', 'hooray' ] );
+
+	  
+	}
+	get datGui()
+	{
+		return this.dgui;
+	}
 
 	//---------------------------------------------------------------------------------------------
 	// PUBLIC
