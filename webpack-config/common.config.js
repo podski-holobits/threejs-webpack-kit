@@ -72,6 +72,20 @@ const config = {
                     }
                 }
             },
+            {
+                test: /\.(gltf|glb)$/,
+                use: {
+                    loader: "file-loader",
+                    options: {
+                        //keep original image filename
+                        name: '[name].[ext]',
+                        //define output path for img files
+                        outputPath: 'assets/',
+                        //put the outputPath into injected path into html file
+                        publicPath: 'assets/'
+                    }
+                }
+            },
 			{   //fonts loader
 				test: /\.(woff|woff2|eot|ttf|otf)$/,
 				use: {

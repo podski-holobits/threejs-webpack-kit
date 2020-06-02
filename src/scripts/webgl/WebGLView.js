@@ -1,5 +1,10 @@
 import 'three';
 import { OrbitControls } from 'three-examples/controls/OrbitControls.js'
+import AssetLoader from './AssetLoader.js';
+import foxGltfPath from '../../assets/gltf/monkey.glb';
+import monkeyGltfPath from '../../assets/gltf/monkey.glb';
+import torusGltfPath from '../../assets/gltf/torus.glb';
+
 export default class WebGLView {
 
     constructor(app) {
@@ -8,9 +13,11 @@ export default class WebGLView {
         
         this.initThree();
         this.initInteractions();
+        this.initLoader();
         this.initEnvironment();
         this.initModels();
         this.initLights();
+        console.log("[M] App initialized")
 	}
 
 	initThree() {
@@ -48,8 +55,9 @@ export default class WebGLView {
 				this.controls.maxPolarAngle = Math.PI / 2;
 				this.controls.target.set(0,15,0);
     }
-    initModels()
+    initLoader()
     {
+        this.assetloader = new AssetLoader(this.app);
     }
 
 	initEnvironment() {
@@ -64,7 +72,7 @@ export default class WebGLView {
         mesh.position.set( 0, 15, 0 );
         mesh.updateMatrix();
         mesh.matrixAutoUpdate = false;
-        this.scene.add( mesh );
+        //this.scene.add( mesh );
 
         
         mesh = new THREE.Mesh( geometry, material );
@@ -98,7 +106,55 @@ export default class WebGLView {
         mesh.matrixAutoUpdate = false;
         this.scene.add( mesh );
     }
+    initModels()
+    {
+        this.assetloader.gltfLoader.load( foxGltfPath,  ( gltf ) => {
 
+               //var  mixer = new THREE.AnimationMixer( gltf.scene );
+                //var action = mixer.clipAction( gltf.animations[ 0 ] );
+               // action.play();
+            
+                this.scene.add( gltf.scene );
+        
+            },
+            // called while loading is progressing
+            ( xhr ) =>  {
+        
+                console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+        
+            },
+            // called when loading has errors
+            ( error ) =>  {
+        
+                console.log( 'An error happeneddd' );
+                console.log("Error", error.name);
+                console.log("Error", error.message);
+            }
+         );
+        this.assetloader.gltfLoader.load( monkeyGltfPath,  ( gltf ) => {
+ 
+                //var  mixer = new THREE.AnimationMixer( gltf.scene );
+                 //var action = mixer.clipAction( gltf.animations[ 0 ] );
+                // action.play();
+             
+                 this.scene.add( gltf.scene );
+         
+             },
+             // called while loading is progressing
+             ( xhr ) =>  {
+         
+                 console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+         
+             },
+             // called when loading has errors
+             ( error ) =>  {
+         
+                 console.log( 'An error happeneddd' );
+                 console.log("Error", error.name);
+                 console.log("Error", error.message);
+             }
+          );
+    }
     initLights()
     {
         this.light1 = new THREE.DirectionalLight( 0xffffff );
