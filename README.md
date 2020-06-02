@@ -35,6 +35,11 @@ npm start:dev
 * cleans the production 'dist' folder on start
 
 
+## News
+* added loading canvas overlay
+* added simple gltf mesh loading
+* added dat.gui
+
 ## Structure (in progress)
 ```
 dist - Directory for built distributionfiles from the npm build:prod script
@@ -51,6 +56,7 @@ src - Directory for all development files (js, hmtl, images, shaders)
 - [stats.js](https://github.com/mrdoob/stats.js/) - standard performance monitor for three.js
 - [glslify](https://github.com/glslify/glslify) - node.js-style module system for GLSL, allows  to install GLSL modules from npm and use in shaders. Provided and supported by [#stackgl](http://stack.gl/).
 - [gsap](https://www.npmjs.com/package/gsap) - animation platform, to make things smooth and nice.
+- [dat.gui](https://github.com/dataarts/dat.gui) - simple debug.gui, with example one parameter.
 
 ## License
 MIT
