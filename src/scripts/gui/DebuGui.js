@@ -22,16 +22,35 @@ export default class DebuGui {
         this.stats.showPanel( 0 ); // 0: fps, 1: ms, 2: mb, 3+: custom
 		document.body.appendChild(this.stats.dom);
 	}
+
 	initDatGui() {
 		this.dgui = new dat.GUI({ autoPlace: false });
 		this.customContainer = document.getElementById('dgui-container');
 		this.customContainer.appendChild(this.dgui.domElement);
+
+		//For produtction:
+		//this.customContainer.style.visibility = "hidden";
 
 		this.message = 'ttt';
 		this.folder_1 = this.dgui.addFolder(`DebugObject`);
 		this.folder_1.add(this, 'message', [ 'pizza', 'chrome', 'hooray' ] );
 
 	  
+		//Adds 
+		dat.GUI.prototype.addThreeColor=function(obj,varName){
+			// threejs & dat.gui have color incompatible formats so we use a dummy data as target :
+			var dummy={};
+			// set dummy initial value :
+			dummy[varName]=obj[varName].getStyle(); 
+			return this.addColor(dummy,varName)
+				.onChange(function( colorValue  ){
+					//set color from result :
+					obj[varName].setStyle(colorValue);
+				});
+		};
+		dat.GUI.prototype.addThreeUniformColor=function(material,uniformName,label){
+			return this.addThreeColor(material.uniforms[uniformName],"value").name(label||uniformName);
+		};
 	}
 	get datGui()
 	{

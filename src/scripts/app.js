@@ -10,12 +10,36 @@ export default class App {
 
 
         init() {
+            this.htmlcontainer = document.getElementById('three_container');
             this.initDebuGui();
             this.initWebGLView();
             //At the end - add all the callback listeners (for binding context)
             this.addListeners();
-            this.animate();
-		    this.resize();
+            //this.animate();
+            this.resize();
+            
+            
+            this.now = 0;
+            this.then = 0;
+            this.delta = 0;
+            this.fps = 60;
+            this.interval = 1000/this.fps;
+            
+
+            //Framerate is defined to have maximum of 60Hz
+            window.requestAnimationFrame = function() {
+                return window.requestAnimationFrame ||
+                    window.webkitRequestAnimationFrame ||
+                    window.mozRequestAnimationFrame ||
+                    window.msRequestAnimationFrame ||
+                    window.oRequestAnimationFrame ||
+                    function(f) {
+                        window.setTimeout(f,this.interval).bind(this);
+                    }
+            }();
+
+            this.handlerAnimate();
+
         }
 
         initDebuGui() {
@@ -29,7 +53,7 @@ export default class App {
 
         addListeners() {
 		    window.addEventListener('resize', this.resize.bind(this));
-            this.handlerAnimate = this.animate.bind(this);
+            //this.handlerAnimate = this.animate.bind(this);
         }
 
        
@@ -55,12 +79,29 @@ export default class App {
 
     //---------------------------------------------------------------------------------------------
 	// PUBLIC RENDER 
-	//--------------------------------------------------------------------------------------------- 
+    //--------------------------------------------------------------------------------------------- 
+    handlerAnimate() {
+
+        requestAnimationFrame(this.handlerAnimate.bind(this));
+        this.now = Date.now();
+        this.delta = this.now -  this.then;
+        
+        if (this.delta > this.interval) 
+        {
+            
+            this.then = this.now - (this.delta % this.interval);
+            this.animate();
+            //this.animate.bind(this);
+            // ... Code for Drawing the Frame ...
+           // var time_el = (then - first)/1000;
+            //$('#frame_count').innerHTML = ++counter + 'f / ' + parseInt(time_el) + 's = ' + parseInt(counter/time_el) + 'fps';
+        }
+        
+    }
     animate() {
         this.update();
         this.render();
-    
-        requestAnimationFrame(this.handlerAnimate);
+        //requestAnimationFrame(this.handlerAnimate);
     }
 	update() {
 		if (this.glview) this.glview.update();

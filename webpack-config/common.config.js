@@ -73,7 +73,7 @@ const config = {
                 }
             },
             {
-                test: /\.(gltf|glb)$/,
+                test: /\.(gltf|glb|mp3)$/,
                 use: {
                     loader: "file-loader",
                     options: {

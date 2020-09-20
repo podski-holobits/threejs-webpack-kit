@@ -66,5 +66,5 @@ MIT
 - the structure of [ThreeJS-Webpack-ES6-Boilerplate](https://github.com/paulmg/ThreeJS-Webpack-ES6-Boilerplate/) project by [paulmg](https://github.com/paulmg/ThreeJS-Webpack-ES6-Boilerplate/commits?author=paulmg). This is a clear and good alternative to my threejs-webpack-kit - so check out if it suits you better! I tried to make sth a bit simpler and more understandable for my rudimentary JS knowledge;
 - three.js [OrbitControls](https://threejs.org/docs/index.html#examples/en/controls/OrbitControls) demo.
 - package contains sample gltf file Fox.glb from [PixelMann](https://opengameart.org/content/fox-and-shiba)
-
+- it is hard to make glslify work with webpack and babel. Here is why by [chasevida](https://github.com/chasevida/glslify-webpack)
 [© Piotr Podziemski 2020](http://www.holobits.pl)
