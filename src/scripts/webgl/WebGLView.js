@@ -137,7 +137,7 @@ export default class WebGLView {
         this.controls.minDistance = 100;
         this.controls.maxDistance = 500;
 
-        //this.controls.maxPolarAngle = Math.PI / 2;
+        this.controls.maxPolarAngle = Math.PI / 2;
         this.controls.target.set(0,15,0);
 
         this.controls.enabled = true;
@@ -294,7 +294,7 @@ export default class WebGLView {
                 //var action = mixer.clipAction( gltf.animations[ 0 ] );
                // action.play();
                 
-             this.app.debugui.dgui.add(model.position, 'y',  -15, 15);
+             this.app.debugui.dgui.add(model.position, 'y',  -3, 25).name("y position");
              this.scene.add( model );
         
             },
@@ -316,7 +316,7 @@ export default class WebGLView {
 		this.light1.position.set( 1, 1, 1 );
 		this.scene.add( this.light1 );
 
-        this.light2 = new THREE.DirectionalLight( 0x002288 );
+        this.light2 = new THREE.DirectionalLight( 0x888888 );
 		this.light2.position.set( - 1, - 1, - 1 );
 		this.scene.add( this.light2 );
 

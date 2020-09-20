@@ -31,9 +31,6 @@ export default class DebuGui {
 		//For produtction:
 		//this.customContainer.style.visibility = "hidden";
 
-		this.message = 'ttt';
-		this.folder_1 = this.dgui.addFolder(`DebugObject`);
-		this.folder_1.add(this, 'message', [ 'pizza', 'chrome', 'hooray' ] );
 
 	  
 		//Adds 

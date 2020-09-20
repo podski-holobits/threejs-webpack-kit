@@ -11,7 +11,7 @@
     right:0;
     left:0;
 	opacity: 1;
- 	transition: 2s opacity;
+ 	transition: 0.4s opacity;
 }
 
 #loading-container.fade-out {
@@ -88,19 +88,19 @@
 }
 
 @-webkit-keyframes stroke-color {
-  0%  { stroke: #39b54a; }
-  25% { stroke: #39b54a; }
+  0%  { stroke: #3498DB; }
+  25% { stroke: #3498DB; }
   45% { stroke: #3498DB; }
-  75% { stroke: #39b54a; }
-  99% { stroke: #39b54a; }
+  75% { stroke: #3498DB; }
+  99% { stroke: #3498DB; }
 }
 
 @keyframes stroke-color {
-  0%  { stroke: #39b54a; }
-  25% { stroke: #39b54a; }
+  0%  { stroke: #3498DB; }
+  25% { stroke: #3498DB; }
   45% { stroke: #3498DB; }
-  75% { stroke: #39b54a; }
-  99% { stroke: #39b54a; }
+  75% { stroke: #3498DB; }
+  99% { stroke: #3498DB; }
 }
 
 
