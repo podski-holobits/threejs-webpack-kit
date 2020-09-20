@@ -2,6 +2,8 @@
 ## A template for three.js projects based on webpack
 [https://github.com/podski-holobits/threejs-webpack-kit](https://github.com/podski-holobits/threejs-webpack-kit)
 
+DEMO:  [http://dev.holobits.pl/threejs-webpack-kit/](http://dev.holobits.pl/threejs-webpack-kit/)
+
 
 ![printscreen](./about-stuff/prtscr.png "threejs-webpack-kit")
 
