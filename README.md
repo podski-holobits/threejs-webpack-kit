@@ -3,7 +3,7 @@
 [https://github.com/podski-holobits/threejs-webpack-kit](https://github.com/podski-holobits/threejs-webpack-kit)
 
 
-![printscreen](./about-stuff/prtscr.jpg "threejs-webpack-kit")
+![printscreen](./about-stuff/prtscr.png "threejs-webpack-kit")
 
 ## Soon available on npm 
 
