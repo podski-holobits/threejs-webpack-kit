@@ -1,9 +1,8 @@
 import 'three';
 import { OrbitControls } from 'three-examples/controls/OrbitControls.js'
 import AssetLoader from './AssetLoader.js';
-import foxGltfPath from '../../assets/gltf/monkey.glb';
-import monkeyGltfPath from '../../assets/gltf/monkey.glb';
-import torusGltfPath from '../../assets/gltf/torus.glb';
+import GlHelper from './GlHelper.js';
+import RroboGltfPath from '../../assets/gltf/roboquick.glb';
 
 //----------------------------------------------------
 // Imports - other libraries
@@ -15,6 +14,7 @@ import glslify from "glslify";
 //----------------------------------------------------
 // Imports - shaders and textures
 //----------------------------------------------------
+import RoboAo from "../../assets/img/robo_ao3.png";
 import PerlinNoise from "../../assets/img/perlin-noise-texture.jpg";
 import DiscTexture from "../../assets/img/disc.png";
 import GradientTexture from "../../assets/img/gradient.png";
@@ -29,11 +29,11 @@ export default class WebGLView {
         this.app = app;
         this.MINDEVICEPIXELRATIO = 2;
         
-        this.initSceneConstants();
 
         this.initThree();
-        this.initInteractions();
         this.initLoader();
+        this.initSceneConstants();
+        this.initInteractions();
         //this.initAudio();
         this.initEnvironment();
 
@@ -71,7 +71,7 @@ export default class WebGLView {
         this.colorLine = new THREE.Color("rgb(173,173,173)"); //main timeline color//"rgb(25, 27, 25)"
         this.colorFont = new THREE.Color("rgb(83,83,83)"); //"rgb(25, 27, 25)"
 
-        this.colorBackground = new THREE.Color("rgb(170,170,170)"); //"rgb(25, 27, 25)"
+        this.colorBackground = new THREE.Color("rgb(70,70,70)"); //"rgb(25, 27, 25)"
         this.groundColor = new THREE.Color("#rgb(248,248,248)");
         this.groundEmissive=  new THREE.Color("rgb(85,85,85)");
 
@@ -79,6 +79,33 @@ export default class WebGLView {
         this.noise = new THREE.TextureLoader().load(PerlinNoise);
         this.spriteDisc = new THREE.TextureLoader().load(DiscTexture);
 
+        this.roboAoTexture = this.assetLoader.textureLoader.load(RoboAo);
+        this.roboAoTexture.encoding = THREE.sRGBEncoding;
+        this.roboAoTexture.flipY = false;
+        this.roboAoTexture.magFilter = THREE.LinearFilter;
+        this.roboAoTexture.minFilter = THREE.LinearFilter;
+
+
+        this.roboMaterial = new THREE.MeshPhysicalMaterial( {
+            metalness: 0.0,
+            roughness: 0.1,
+            clearcoat: 1.0,
+            side:  THREE.FrontSide,
+            dithering: true,
+            map: this.roboAoTexture,
+            //normalMap: normalMap4,
+            //clearcoatNormalMap: clearcoatNormaMap,
+
+            // y scale is negated to compensate for normal map handedness.
+            //clearcoatNormalScale: new THREE.Vector2( 2.0, - 2.0 )
+        } );
+        this.materialBlack = new THREE.MeshPhongMaterial( {
+            color: 0x000000,
+            shininess: 0.7,
+            specular: 0x000000,
+            transparent:false,
+            side:  THREE.FrontSide
+        } );
     }
 
 	initThree() {
@@ -88,6 +115,7 @@ export default class WebGLView {
         this.pixelRatio = Math.min(this.MINDEVICEPIXELRATIO, window.devicePixelRatio);
         this.renderer.setPixelRatio(this.pixelRatio);
         this.renderer.shadowMap.enabled = true;
+        this.renderer.outputEncoding = THREE.sRGBEncoding;
         this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
 
 
@@ -285,17 +313,55 @@ export default class WebGLView {
     initModels()
     {
         var model = new THREE.Object3D();
-        this.assetLoader.gltfLoader.load( foxGltfPath,  ( gltf ) => {
+        this.assetLoader.gltfLoader.load( RroboGltfPath,  ( gltf ) => {
 
             //Add model
             model = gltf.scene;
-            model.name = name;
-               //var  mixer = new THREE.AnimationMixer( gltf.scene );
-                //var action = mixer.clipAction( gltf.animations[ 0 ] );
-               // action.play();
+            model.name = "Robot";
+            model.scale.set( 14, 14, 14 );
+            model.rotation.y = -Math.PI/2;
+            
+            model.traverse( GlHelper.disposeMaterial );///
+            
+            //Setup materials for bloom scene and shadow
+            model.traverse((o) => {
+                if (o.name == "Cube_0")  {
+                    console.log("isMesh")
+                    console.log(o)
+                    o.castShadow = true;
+                    o.receiveShadow = true;
+                    o.material = this.roboMaterial; 
+
+                    //if(isRaycasted)
+                    //{
+                        //Define bounding box
+                        o.geometry.computeBoundingBox();
+                        model.boundingSize = new THREE.Vector3();
+                        o.geometry.boundingBox.getSize(model.boundingSize);
+
+                        var iboxgeometry = new THREE.BoxBufferGeometry( model.boundingSize.x, model.boundingSize.y*2,model.boundingSize.z,1,1,1 );
+                        var material = new THREE.MeshBasicMaterial( {color: 0x00ff00, transparent: true, opacity: 0.5} );
+                        var cube = new THREE.Mesh( iboxgeometry, material );
+
+                        cube.geometry.computeBoundingBox();
+                        //cube.rotation.x = -Math.PI/2;
+                        //cube.position.y = -o.geometry.boundingBox.min.z - model.boundingSize.z/2.0;
+
+                        cube.visible = false;
+                        cube.name = 'intersectBox';
+                        this.debugObjects.push(cube);
+                        model.add(cube );
+                    //}
+
+                }
+            });
+
+            //var  mixer = new THREE.AnimationMixer( gltf.scene );
+            //var action = mixer.clipAction( gltf.animations[ 0 ] );
+            // action.play();
                 
-             this.app.debugui.dgui.add(model.position, 'y',  -3, 25).name("y position");
-             this.scene.add( model );
+            this.app.debugui.dgui.add(model.position, 'y',  -3, 25).name("y position");
+            this.scene.add( model );
         
             },
             // called while loading is progressing
