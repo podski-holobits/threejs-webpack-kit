@@ -93,6 +93,7 @@ export default class WebGLView {
             side:  THREE.FrontSide,
             dithering: true,
             map: this.roboAoTexture,
+            transparent: true,
             //normalMap: normalMap4,
             //clearcoatNormalMap: clearcoatNormaMap,
 
@@ -115,6 +116,7 @@ export default class WebGLView {
         this.pixelRatio = Math.min(this.MINDEVICEPIXELRATIO, window.devicePixelRatio);
         this.renderer.setPixelRatio(this.pixelRatio);
         this.renderer.shadowMap.enabled = true;
+        this.renderer.shadowMap.type = THREE.PCFShadowMap;
         this.renderer.outputEncoding = THREE.sRGBEncoding;
         this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
 
@@ -232,6 +234,8 @@ export default class WebGLView {
         //Add debug manipulation
         mesh.updateMatrix();
         mesh.matrixAutoUpdate = true;
+        mesh.castShadow = true;
+        mesh.receiveShadow = false;
         this.scene.add( mesh );
 
         
@@ -240,6 +244,8 @@ export default class WebGLView {
         mesh.position.set( -40, 7.5, 0);
         mesh.updateMatrix();
         mesh.matrixAutoUpdate = true;
+        mesh.castShadow = true;
+        mesh.receiveShadow = false;
         this.scene.add( mesh );
 
         
@@ -248,6 +254,8 @@ export default class WebGLView {
         mesh.position.set( 0, 7.5,-40);
         mesh.updateMatrix();
         mesh.matrixAutoUpdate = false;
+        mesh.castShadow = true;
+        mesh.receiveShadow = false;
         this.scene.add( mesh );
 
         
@@ -256,6 +264,8 @@ export default class WebGLView {
         mesh.position.set( 0, 7.5, 40);
         mesh.updateMatrix();
         mesh.matrixAutoUpdate = false;
+        mesh.castShadow = true;
+        mesh.receiveShadow = false;
         this.scene.add( mesh );
 
 
@@ -378,8 +388,15 @@ export default class WebGLView {
     }
     initLights()
     {
-        this.light1 = new THREE.DirectionalLight( 0xffffff );
-		this.light1.position.set( 1, 1, 1 );
+        this.light1 = new THREE.SpotLight( 0xffffff );
+		this.light1.position.set( 35, 24, 35 );
+        this.light1.castShadow = true;
+        this.light1.shadow.camera.near = 0.1;
+        this.light1.shadow.camera.far = 1000;
+        this.light1.shadow.mapSize.width = 512;
+        this.light1.shadow.mapSize.height = 512;
+        this.light1.shadow.bias =-0.0001;
+        this.light1.intensity = 0.4;
 		this.scene.add( this.light1 );
 
         this.light2 = new THREE.DirectionalLight( 0x888888 );
