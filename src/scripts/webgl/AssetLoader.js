@@ -1,7 +1,8 @@
 
 import 'three';
 import { gsap } from 'gsap';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+//import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+const { GLTFLoader } = require('three/examples/jsm/loaders/GLTFLoader.js')
 
 
 export default class AssetLoader {
