@@ -1,7 +1,7 @@
 
-import 'three';
-import { gsap } from 'gsap';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+//import 'three';
+//import { gsap } from 'gsap';
+//import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 //const { GLTFLoader } = require('three/examples/jsm/loaders/GLTFLoader.js')
 
 
@@ -28,7 +28,7 @@ export default class AssetLoader {
 
         );
 
-        this.gltfLoader = new GLTFLoader(this.manager);
+        this.gltfLoader = new THREE.GLTFLoader(this.manager);
         this.audioLoader = new THREE.AudioLoader(this.manager);
         this.textureLoader = new THREE.TextureLoader(this.manager);
         this.fontloader = new THREE.FontLoader(this.manager);

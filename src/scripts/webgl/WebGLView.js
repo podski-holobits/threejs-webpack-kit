@@ -3,12 +3,12 @@ import AssetLoader from './AssetLoader.js';
 import GlHelper from './GlHelper.js';
 import RroboGltfPath from '../../assets/gltf/roboquick.glb';
 
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+//import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 //----------------------------------------------------
 // Imports - other libraries
 //----------------------------------------------------
-import { gsap } from "gsap";
-import glslify from "glslify";
+//import { gsap } from "gsap";
+//import glslify from "glslify";
 
 
 //----------------------------------------------------
@@ -152,7 +152,7 @@ export default class WebGLView {
     initInteractions() {
         // controls
 
-        this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+        this.controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
 
         //controls.addEventListener( 'change', render ); // call this only in static scenes (i.e., if there is no animation loop)
 

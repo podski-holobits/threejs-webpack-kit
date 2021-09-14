@@ -3,15 +3,15 @@ const path = require('path');
 
 // [1] Requiring development packages
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin'); 
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 // [2] Paths - entry paths and names
-const __rootPath        = path.resolve(__dirname, '../');           // We are in config folder, so we need to know the root folder path
-const includePath       = path.join(__rootPath, 'src');
-const nodeModulesPath   = path.join(__rootPath, 'node_modules');
-const entryPath         = './src/init.js';                          //path to starting javascriptfile
-const distPath          = 'dist';                                   //path to dist folder
+const __rootPath = path.resolve(__dirname, '../');           // We are in config folder, so we need to know the root folder path
+const includePath = path.join(__rootPath, 'src');
+const nodeModulesPath = path.join(__rootPath, 'node_modules');
+const entryPath = './src/init.js';                          //path to starting javascriptfile
+const distPath = 'dist';                                   //path to dist folder
 
 // [3] moudle.exports configuration
 const config = {
@@ -23,16 +23,16 @@ const config = {
     module: {
         rules: [
             {   //Babel transpiling configuration
-                test:  /\.js$/,
+                test: /\.js$/,
                 include: includePath,
-                exclude:  nodeModulesPath,
+                exclude: nodeModulesPath,
                 use: {
                     loader: "babel-loader",
                     options: {
                         presets: ['@babel/preset-env']
                     }
                 }
-            }, 
+            },
             {   //Html loader
                 test: /\.html$/,
                 use: [
@@ -59,7 +59,7 @@ const config = {
                 ],
             },
             {   //Image loader
-                test:  /\.(png|svg|jpe?g|gif)$/,
+                test: /\.(png|svg|jpe?g|gif)$/,
                 use: {
                     loader: "file-loader",
                     options: {
@@ -86,9 +86,9 @@ const config = {
                     }
                 }
             },
-			{   //fonts loader
-				test: /\.(woff|woff2|eot|ttf|otf)$/,
-				use: {
+            {   //fonts loader
+                test: /\.(woff|woff2|eot|ttf|otf)$/,
+                use: {
                     loader: 'file-loader',
                     options: {
                         //keep original image filename
@@ -99,26 +99,30 @@ const config = {
                         publicPath: 'fonts/'
                     }
                 }
-			},
-			{   //shader loader
-				test: /\.(glsl|frag|vert)$/,
-				use: [
-                    'glslify-import-loader', 
-                    'raw-loader', 
+            },
+            {   //shader loader
+                test: /\.(glsl|frag|vert)$/,
+                use: [
+                    'glslify-import-loader',
+                    'raw-loader',
                     'glslify-loader']
-			},
-			{   //loader for example modules for three.js
-				test: /three\/examples\/jsm/,
-				use: 'imports-loader?THREE=three'
-			}
+            },
+            {   //loader for example modules for three.js
+                test: /three\/examples\/jsm/,
+                use: 'imports-loader?THREE=three'
+            }
         ]
     },
-	resolve: {
-		alias: {
+    resolve: {
+        alias: {
             //alias wykorzystujący ten efekt https://threejs.org/docs/#manual/en/introduction/Import-via-modules
-			'three-examples': path.join(__rootPath, './node_modules/three/examples/jsm')   
-		}
-	},
+            'three-examples': path.join(__rootPath, './node_modules/three/examples/jsm')
+        }
+    },
+    externals: {
+        'three': 'THREE'
+        // (more)
+    },
     plugins: [
         new HtmlWebpackPlugin({
             template: './src/index.html',
@@ -130,10 +134,10 @@ const config = {
         }),
         new CleanWebpackPlugin(),
         //Provide three without need to import in a file
-		new webpack.ProvidePlugin({
-			'THREE': 'three'
-		})
+        new webpack.ProvidePlugin({
+            'THREE': 'three'
+        })
     ]
 };
 
-module.exports = {config, entryPath, distPath, __rootPath};
+module.exports = { config, entryPath, distPath, __rootPath };
