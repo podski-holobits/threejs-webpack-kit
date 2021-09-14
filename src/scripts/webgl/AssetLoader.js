@@ -1,7 +1,7 @@
 
 import 'three';
 import { gsap } from 'gsap';
-import { GLTFLoader } from 'three-examples/loaders/GLTFLoader';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 
 export default class AssetLoader {
@@ -10,44 +10,41 @@ export default class AssetLoader {
         //Always define reference to the main app for this class context
         this.app = app;
         this.eventLoaded = new Event('ModelsLoaded');
-        
+
         this.initLoaderManager();
         this.transitioning = false;
     }
-    
 
-    initLoaderManager()
-    {
-        this.loadingScreen = document.getElementById( 'loading-container' );
+
+    initLoaderManager() {
+        this.loadingScreen = document.getElementById('loading-container');
 
         //init main loader manager
         this.manager = new THREE.LoadingManager(
             () => {
-                this.onTransitionEnd();                
+                this.onTransitionEnd();
             }
 
         );
-        
-        this.gltfLoader = new GLTFLoader( this.manager);
+
+        this.gltfLoader = new GLTFLoader(this.manager);
         this.audioLoader = new THREE.AudioLoader(this.manager);
         this.textureLoader = new THREE.TextureLoader(this.manager);
         this.fontloader = new THREE.FontLoader(this.manager);
 
-        console.log( '[I] AssetLoadaer Initialized' );
+        console.log('[I] AssetLoadaer Initialized');
     }
 
-    onTransitionEnd( event ) {
-        if(!this.transitioning )
-        {
+    onTransitionEnd(event) {
+        if (!this.transitioning) {
             this.transitioning = true;
-            this.loadingScreen.classList.add( 'fade-out' );
-            this.loadingScreen.addEventListener( 'transitionend',  this.removeLoadingScreen.bind(this));
+            this.loadingScreen.classList.add('fade-out');
+            this.loadingScreen.addEventListener('transitionend', this.removeLoadingScreen.bind(this));
             app.glview.renderer.domElement.dispatchEvent(this.eventLoaded);
         }
     }
 
-    removeLoadingScreen(event)
-    {
+    removeLoadingScreen(event) {
         this.loadingScreen.remove();
 
     }

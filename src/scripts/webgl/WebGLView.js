@@ -1,5 +1,5 @@
 import 'three';
-import { OrbitControls } from 'three-examples/controls/OrbitControls.js'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import AssetLoader from './AssetLoader.js';
 import GlHelper from './GlHelper.js';
 import RroboGltfPath from '../../assets/gltf/roboquick.glb';
