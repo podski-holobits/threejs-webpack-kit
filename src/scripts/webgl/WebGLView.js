@@ -3,12 +3,12 @@ import AssetLoader from './AssetLoader.js';
 import GlHelper from './GlHelper.js';
 import RroboGltfPath from '../../assets/gltf/roboquick.glb';
 
-const { OrbitControls } = require('three/examples/jsm/controls/OrbitControls.js')
+import { OrbitControls } from 'three-examples/controls/OrbitControls.js'
 //----------------------------------------------------
 // Imports - other libraries
 //----------------------------------------------------
 import { gsap } from "gsap";
-//import glslify from "glslify";
+import glslify from "glslify";
 
 
 //----------------------------------------------------
