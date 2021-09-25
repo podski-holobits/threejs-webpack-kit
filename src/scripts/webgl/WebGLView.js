@@ -37,7 +37,7 @@ export default class WebGLView {
         //this.initAudio();
         this.initEnvironment();
 
-        this.initModels();
+        //this.initModels();
         this.initLights();
 
         this.addListeners();
