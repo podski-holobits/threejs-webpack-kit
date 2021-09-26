@@ -35,10 +35,10 @@ export default class WebGLView {
         this.initSceneConstants();
         this.initInteractions();
         //this.initAudio();
-        this.initEnvironment();
+        // this.initEnvironment();
 
         //this.initModels();
-        this.initLights();
+        //this.initLights();
 
         this.addListeners();
         console.log("[I] App initialized")
