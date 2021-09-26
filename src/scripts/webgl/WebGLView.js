@@ -30,7 +30,7 @@ export default class WebGLView {
         this.MINDEVICEPIXELRATIO = 2;
 
 
-        //this.initThree();
+        this.initThree();
         //this.initLoader();
         //this.initSceneConstants();
         //this.initInteractions();
@@ -111,16 +111,20 @@ export default class WebGLView {
 
     initThree() {
         // Initialize scene
+        console.log("Starting initializing renderer")
         this.renderer = new THREE.WebGLRenderer({ antialias: true });
         //var renderer = new THREE.WebGLRenderer({ alpha: true });
+        console.log("Setting pixel ratio")
         this.pixelRatio = Math.min(this.MINDEVICEPIXELRATIO, window.devicePixelRatio);
         this.renderer.setPixelRatio(this.pixelRatio);
         this.renderer.shadowMap.enabled = true;
         this.renderer.shadowMap.type = THREE.PCFShadowMap;
+        console.log("Setting outputEncoding")
         this.renderer.outputEncoding = THREE.sRGBEncoding;
         this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
 
 
+        console.log("Setting camera")
         // camera
         this.camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 3000);
 
@@ -130,8 +134,11 @@ export default class WebGLView {
 
         // renderer
 
+        console.log("Setting scene")
         this.scene = new THREE.Scene();
+        console.log("attaching renderer to canvas")
         this.canvas = this.renderer.domElement;
+        console.log("attached renderer to canvas")
         this.clock = new THREE.Clock(true);
 
         //Init base configuration bools
