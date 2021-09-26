@@ -27,7 +27,7 @@ export default class WebGLView {
     constructor(app) {
         //Always define reference to the main app for this class context
         this.app = app;
-        this.MINDEVICEPIXELRATIO = 2;
+        this.MINDEVICEPIXELRATIO = 1;
 
 
         this.initThree();
@@ -35,10 +35,10 @@ export default class WebGLView {
         this.initSceneConstants();
         this.initInteractions();
         //this.initAudio();
-        // this.initEnvironment();
+        this.initEnvironment();
 
-        //this.initModels();
-        //this.initLights();
+        this.initModels();
+        this.initLights();
 
         this.addListeners();
         console.log("[I] App initialized")
