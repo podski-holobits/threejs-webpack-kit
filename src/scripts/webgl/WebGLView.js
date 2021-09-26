@@ -112,7 +112,7 @@ export default class WebGLView {
     initThree() {
         // Initialize scene
         console.log("Starting initializing renderer")
-        this.renderer = new THREE.WebGLRenderer({ antialias: true });
+        this.renderer = new THREE.WebGLRenderer({ antialias: false });
         //var renderer = new THREE.WebGLRenderer({ alpha: true });
         console.log("Setting pixel ratio")
         this.pixelRatio = Math.min(this.MINDEVICEPIXELRATIO, window.devicePixelRatio);

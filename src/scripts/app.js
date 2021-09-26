@@ -48,7 +48,7 @@ export default class App {
 
     initWebGLView() {
         this.glview = new WebGLView(this);
-        document.querySelector('.container').appendChild(this.glview.renderer.domElement);
+        //document.querySelector('.container').appendChild(this.glview.renderer.domElement);
     }
 
     addListeners() {
