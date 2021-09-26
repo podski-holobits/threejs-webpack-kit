@@ -14,31 +14,31 @@ export default class App {
         this.initDebuGui();
         this.initWebGLView();
         //At the end - add all the callback listeners (for binding context)
-        this.addListeners();
-        //this.animate();
-        this.resize();
-
-
-        this.now = 0;
-        this.then = 0;
-        this.delta = 0;
-        this.fps = 60;
-        this.interval = 1000 / this.fps;
-
-
-        //Framerate is defined to have maximum of 60Hz
-        window.requestAnimationFrame = function () {
-            return window.requestAnimationFrame ||
-                window.webkitRequestAnimationFrame ||
-                window.mozRequestAnimationFrame ||
-                window.msRequestAnimationFrame ||
-                window.oRequestAnimationFrame ||
-                function (f) {
-                    window.setTimeout(f, this.interval).bind(this);
-                }
-        }();
-
-        this.handlerAnimate();
+        /*    this.addListeners();
+            //this.animate();
+            this.resize();
+    
+    
+            this.now = 0;
+            this.then = 0;
+            this.delta = 0;
+            this.fps = 60;
+            this.interval = 1000 / this.fps;
+    
+    
+            //Framerate is defined to have maximum of 60Hz
+            window.requestAnimationFrame = function () {
+                return window.requestAnimationFrame ||
+                    window.webkitRequestAnimationFrame ||
+                    window.mozRequestAnimationFrame ||
+                    window.msRequestAnimationFrame ||
+                    window.oRequestAnimationFrame ||
+                    function (f) {
+                        window.setTimeout(f, this.interval).bind(this);
+                    }
+            }();
+    
+            this.handlerAnimate();*/
 
     }
 
@@ -98,8 +98,8 @@ export default class App {
 
     }
     animate() {
-        //this.update();
-        //this.render();
+        this.update();
+        this.render();
         //requestAnimationFrame(this.handlerAnimate);
     }
     update() {
