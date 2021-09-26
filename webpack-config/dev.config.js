@@ -1,4 +1,4 @@
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const common = require('./common.config.js');
 const path = require('path');
 
@@ -10,7 +10,7 @@ module.exports = merge(commonConfig, {
 	mode: 'development',
 	devtool: 'inline-source-map',   //this defines source code mapping for development
 	devServer: {                    //dev-server configuration
-		contentBase: path.resolve(__rootPath, distPath),
+		static: path.resolve(__rootPath, distPath),
         hot: true,                  //enable Hot Module Replacement https://webpack.js.org/concepts/hot-module-replacement/
         open: true,                 //open in browser after running server
 	}

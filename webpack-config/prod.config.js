@@ -1,4 +1,4 @@
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const common = require('./common.config.js');
 const commonConfig = common.config;
 const distPath = common.distPath;

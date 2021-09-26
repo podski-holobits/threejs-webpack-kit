@@ -14,7 +14,7 @@ export default class App {
         this.initDebuGui();
         this.initWebGLView();
         //At the end - add all the callback listeners (for binding context)
-        /*    this.addListeners();
+            this.addListeners();
             //this.animate();
             this.resize();
     
@@ -38,7 +38,7 @@ export default class App {
                     }
             }();
     
-            this.handlerAnimate();*/
+            this.handlerAnimate();
 
     }
 
@@ -48,7 +48,7 @@ export default class App {
 
     initWebGLView() {
         this.glview = new WebGLView(this);
-        //document.querySelector('.container').appendChild(this.glview.renderer.domElement);
+        document.querySelector('.container').appendChild(this.glview.renderer.domElement);
     }
 
     addListeners() {
@@ -114,7 +114,7 @@ export default class App {
 
 
     // ---------------------------------------------------------------------------------------------
-    // EVENT HANDLERS
+    // EVENT HANDLERS 
     // ---------------------------------------------------------------------------------------------
     resize() {
         if (this.glview) this.glview.resize();
